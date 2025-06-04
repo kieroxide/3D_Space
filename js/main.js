@@ -1,5 +1,5 @@
 const keys = {};
-const focalLength = 500;
+const focalLength = 100;
 const cameraSpeed = 5;
 
 window.addEventListener('keydown', (e) => {
@@ -15,6 +15,7 @@ function main(){
     lines = [];
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
+    ctx.translate(canvas.width / 2, canvas.height / 2);
 
 
     const camera = new Camera();
@@ -30,21 +31,28 @@ function main(){
     pointB = new Point3D(100, 0, 0);
     lines.push(new Line(pointA, pointB,'green'));
 
-    ctx.translate(canvas.width / 2, canvas.height / 2);
+    pointA = new Point3D(100, 100, 300);
+    cube1 = new Cube(pointA, 100);
+
+    pointA = new Point3D(200, 200, 200);
+    cube2 = new Cube(pointA, 100, 'purple');
 
     function draw(){
         ctx.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         movementKeyCheck();
-        for (let i = 0; i < lines.length; i++) {
-            lines[i].render(camera);
-            lines[i].draw(ctx);
+        cube1.getLines();
+        cube2.getLines();
+        for (const line of lines) {
+            line.render(camera);
+            line.draw(ctx);
         }
         requestAnimationFrame(draw);
     }
         
     draw();
     function movementKeyCheck(){
-        console.log(camera.direction)
+        //console.log(camera.direction);
+        console.log(camera.position);
         if (keys['w']) camera.moveForward(cameraSpeed);
         if (keys['s']) camera.moveForward(-cameraSpeed);
 

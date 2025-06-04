@@ -53,11 +53,13 @@ class Camera {
 }
 
 updateRight() {
+    const worldUp = new Point3D(0, 1, 0);
     this.right = new Point3D(
-        Math.cos(this.yaw),
-        0,
-        -Math.sin(this.yaw)
+        this.direction.y * worldUp.z - this.direction.z * worldUp.y,
+        this.direction.z * worldUp.x - this.direction.x * worldUp.z,
+        this.direction.x * worldUp.y - this.direction.y * worldUp.x
     );
+    // Normalize right here
 }
 
 updateUp() {
