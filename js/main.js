@@ -7,7 +7,10 @@ function main(){
     const pointB = new Point3D(100, 100, 100);
     const line = new Line(pointA, pointB,'red');
 
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    
     function draw(){
+        
         line.draw(ctx);
         requestAnimationFrame(draw);
     }
