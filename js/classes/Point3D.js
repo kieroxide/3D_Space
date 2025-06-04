@@ -19,7 +19,7 @@ class Point3D{
     * @param {Point3D} point - 3D point
     * @returns {Point2D} - 2D point from projection
     */
-    project(point){
-        return new Point2D(point.x, point.y);
+    project(){
+        return new Point2D(this.x, this.y);
     }
 }

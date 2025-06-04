@@ -11,10 +11,22 @@ class Line {
     constructor(startPoint, endPoint, lineColour = 'blue') {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
+        this.projectedStart = null;
+        this.projectedEnd = null;
         this.lineColour = lineColour;
+
+        this.project();
     }
 
-    draw(){
-
+    project(){
+        this.projectedStart = this.startPoint.project();
+        this.projectedEnd = this.endPoint.project();
+    }
+    draw(ctx){
+        ctx.beginPath();            
+        ctx.moveTo(this.projectedStart.x, this.projectedStart.y);        
+        ctx.lineTo(this.projectedEnd.x, this.projectedEnd.y);       
+        ctx.stroke();     
+        ctx.strokeStyle = this.lineColour;          
     }
 }

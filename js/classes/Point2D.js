@@ -7,9 +7,8 @@ class Point2D{
    * @param {number} x - The x-coordinate.
    * @param {number} y - The y-coordinate.
    */
-    constructor(x,y,z){
+    constructor(x,y){
         this.x = x;
         this.y = y;
-        this.z = z;
     }
 }
