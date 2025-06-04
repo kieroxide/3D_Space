@@ -7,7 +7,6 @@ function main(){
         // Call draw on next frame
         requestAnimationFrame(draw);
     }
-
     draw(); // Start of loop
 }
 
