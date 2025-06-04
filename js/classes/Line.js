@@ -21,7 +21,8 @@ class Line {
         this.projectedEnd = this.endPoint.render(camera);
     }
     draw(ctx){
-        
+        if(!(this.projectedEnd || this.projectedStart === null) ) {return}
+
         ctx.beginPath();            
         ctx.moveTo(this.projectedStart.x, this.projectedStart.y);        
         ctx.lineTo(this.projectedEnd.x, this.projectedEnd.y);       

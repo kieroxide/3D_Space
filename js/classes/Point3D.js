@@ -50,8 +50,9 @@ class Point3D {
 
     //Perspective projection
     projectPerspective() {
-        const px = (focalLength * this.x) / this.z;
-        const py = (focalLength * this.y) / this.z;
+        const z = this.z === 0 ? -0.0001 : this.z; // Prevent division by zero
+        const px = (focalLength * this.x) / -z;
+        const py = (focalLength * this.y) / -z;
 
         return new Point2D(px, py);
     }
@@ -60,6 +61,7 @@ class Point3D {
         let p = this.translate(camera.position);
         p = p.rotateYaw(camera.yaw);
         p = p.rotatePitch(camera.pitch);
+        if (p.z >= 0) return 0; // Prevent division by zero
         return p.projectPerspective();
     }
 }

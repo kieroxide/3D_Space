@@ -1,5 +1,5 @@
 const keys = {};
-const focalLength = 100;
+const focalLength = 1000;
 const cameraSpeed = 5;
 
 window.addEventListener('keydown', (e) => {
@@ -59,13 +59,13 @@ function main(){
         if (keys['d']) camera.moveRight(cameraSpeed);
         if (keys['a']) camera.moveRight(-cameraSpeed);
 
-        if (keys[' ']) camera.moveUp(cameraSpeed);
-        if (keys['shift']) camera.moveUp(-cameraSpeed);
+        if (keys[' ']) camera.moveUp(-cameraSpeed);
+        if (keys['shift']) camera.moveUp(cameraSpeed);
 
         if( keys['arrowup']) camera.rotateX(0.05);
         if( keys['arrowdown']) camera.rotateX(-0.05);
-        if( keys['arrowleft']) camera.rotateY(0.05);
-        if( keys['arrowright']) camera.rotateY(-0.05);
+        if( keys['arrowleft']) camera.rotateY(-0.05);
+        if( keys['arrowright']) camera.rotateY(0.05);
     }
 }
 
