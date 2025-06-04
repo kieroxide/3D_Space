@@ -45,11 +45,12 @@ class Camera {
   }
 
   updateDirection() {
-    this.direction = new Point3D(
+    let p = new Point3D(
         Math.cos(this.pitch) * Math.sin(this.yaw),
         Math.sin(this.pitch),
         -Math.cos(this.pitch) * Math.cos(this.yaw)
     );
+    this.direction = p.normalize(); // Normalize the direction vector
 }
 
 updateRight() {
@@ -59,7 +60,7 @@ updateRight() {
         this.direction.z * worldUp.x - this.direction.x * worldUp.z,
         this.direction.x * worldUp.y - this.direction.y * worldUp.x
     );
-    // Normalize right here
+    this.right = this.right.normalize(); // Normalize the right vector
 }
 
 updateUp() {
@@ -69,6 +70,7 @@ updateUp() {
         this.right.z * this.direction.x - this.right.x * this.direction.z,
         this.right.x * this.direction.y - this.right.y * this.direction.x
     );
+    this.up = this.up.normalize(); // Normalize the up vector
 }
 
 updateVectors() {

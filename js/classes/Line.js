@@ -16,17 +16,20 @@ class Line {
         this.lineColour = lineColour;
     }
 
-    render(camera){
+    render(camera) {
         this.projectedStart = this.startPoint.render(camera);
         this.projectedEnd = this.endPoint.render(camera);
     }
-    draw(ctx){
-        if(!(this.projectedEnd || this.projectedStart === null) ) {return}
 
-        ctx.beginPath();            
-        ctx.moveTo(this.projectedStart.x, this.projectedStart.y);        
-        ctx.lineTo(this.projectedEnd.x, this.projectedEnd.y);       
-        ctx.strokeStyle = this.lineColour;          
-        ctx.stroke();     
+    draw(ctx) {
+        if (!(this.projectedEnd || this.projectedStart === null)) {
+            return;
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(this.projectedStart.x, this.projectedStart.y);
+        ctx.lineTo(this.projectedEnd.x, this.projectedEnd.y);
+        ctx.strokeStyle = this.lineColour;
+        ctx.stroke();
     }
 }
