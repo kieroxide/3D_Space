@@ -16,9 +16,9 @@ class Line {
         this.lineColour = lineColour;
     }
 
-    project(camera){
-        this.projectedStart = this.startPoint.project(camera);
-        this.projectedEnd = this.endPoint.project(camera);
+    render(camera){
+        this.projectedStart = this.startPoint.render(camera);
+        this.projectedEnd = this.endPoint.render(camera);
     }
     draw(ctx){
         

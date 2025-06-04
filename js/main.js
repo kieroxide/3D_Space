@@ -24,7 +24,7 @@ function main(){
     function draw(){
         ctx.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         movementKeyCheck();
-        line.project(camera);
+        line.render(camera);
         line.draw(ctx);
         requestAnimationFrame(draw);
     }
@@ -39,6 +39,11 @@ function main(){
 
         if (keys[' ']) camera.moveUp(1);
         if (keys['shift']) camera.moveUp(-1);
+
+        if( keys['arrowup']) camera.rotateX(0.05);
+        if( keys['arrowdown']) camera.rotateX(-0.05);
+        if( keys['arrowleft']) camera.rotateY(0.05);
+        if( keys['arrowright']) camera.rotateY(-0.05);
     }
 }
 

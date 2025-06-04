@@ -1,25 +1,57 @@
 /**
  * Class representing a point in 3D space.
  */
-class Point3D{
-  /**
-   * Create a 3D point.
-   * @param {number} x - The x-coordinate.
-   * @param {number} y - The y-coordinate.
-   * @param {number} z - The z-coordinate.
-   */
-    constructor(x,y,z){
+class Point3D {
+    /**
+     * Create a 3D point.
+     * @param {number} x - The x-coordinate.
+     * @param {number} y - The y-coordinate.
+     * @param {number} z - The z-coordinate.
+     */
+    
+    constructor(x, y, z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
-   /**
-    * Simple orthaogonal projection from 3D to 2D plane.
-    *
-    * @param {Point3D} point - 3D point
-    * @returns {Point2D} - 2D point from projection
-    */
-    project(camera){
-        return new Point2D(this.x + camera.position.x, this.y - camera.position.y);
+
+    // Subtract camera position for camera-relative movement
+    translate(position) {
+        return new Point3D(this.x - position.x, this.y - position.y, this.z - position.z);
+    }
+
+    rotateYaw(yaw) {
+        const cosYaw = Math.cos(-yaw);
+        const sinYaw = Math.sin(-yaw);
+        const x = cosYaw * this.x - sinYaw * this.z;
+        const z = sinYaw * this.x + cosYaw * this.z;
+        return new Point3D(x, this.y, z);
+    }
+
+    rotatePitch(pitch) {
+        const cosPitch = Math.cos(-pitch);
+        const sinPitch = Math.sin(-pitch);
+        const y = cosPitch * this.y - sinPitch * this.z;
+        const z = sinPitch * this.y + cosPitch * this.z;
+        return new Point3D(this.x, y, z);
+    }
+
+    // Perspective projection (uncomment for 3D effect)
+    // project() {
+    //     const focalLength = 300;
+    //     const z = this.z === 0 ? 0.0001 : this.z;
+    //     return new Point2D((this.x * focalLength) / z, (this.y * focalLength) / z);
+    // }
+
+    // Orthographic projection
+    project() {
+        return new Point2D(this.x, this.y);
+    }
+
+    render(camera) {
+        let p = this.translate(camera.position);
+        p = p.rotateYaw(camera.yaw);
+        p = p.rotatePitch(camera.pitch);
+        return p.project();
     }
 }
