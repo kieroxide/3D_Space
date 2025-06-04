@@ -10,22 +10,33 @@ window.addEventListener('keyup', (e) => {
 
 function main(){
     // Canvas setup
+    lines = [];
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
 
     const camera = new Camera();
-    const pointA = new Point3D(0, 0, 0);
-    const pointB = new Point3D(100, 100, 100);
-    const line = new Line(pointA, pointB,'red');
+    let pointA = new Point3D(0, 0, 0);
+    let pointB = new Point3D(0, 0, 100);
+    lines.push(new Line(pointA, pointB,'red'));
+
+    pointA = new Point3D(0, 0, 0);
+    pointB = new Point3D(0, 100, 0);
+    lines.push(new Line(pointA, pointB,'blue'));
+
+    pointA = new Point3D(0, 0, 0);
+    pointB = new Point3D(100, 0, 0);
+    lines.push(new Line(pointA, pointB,'green'));
 
     ctx.translate(canvas.width / 2, canvas.height / 2);
 
     function draw(){
         ctx.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         movementKeyCheck();
-        line.render(camera);
-        line.draw(ctx);
+        for (let i = 0; i < lines.length; i++) {
+            lines[i].render(camera);
+            lines[i].draw(ctx);
+        }
         requestAnimationFrame(draw);
     }
         

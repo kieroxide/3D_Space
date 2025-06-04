@@ -54,9 +54,9 @@ class Camera {
 
 updateRight() {
     this.right = new Point3D(
-        Math.sin(this.yaw - Math.PI / 2),
+        Math.cos(this.yaw),
         0,
-        Math.cos(this.yaw - Math.PI / 2)
+        -Math.sin(this.yaw)
     );
 }
 
