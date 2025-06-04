@@ -1,34 +1,32 @@
 /**
- * Class representing a point in 2D space.
+ * 3D free-fly camera with position and orientation vectors.
  */
-class Camera{
-  /**
-   * Create a 2D point.
-   * @param {number} x - The x-coordinate.
-   * @param {number} y - The y-coordinate.
-   */
-    constructor(){
-        this.position = new Point3D(0, 0, 100);
+class Camera {
+    constructor() {
+        this.position = new Point3D(0, 0, 1);
         this.direction = new Point3D(0, 0, -1);
         this.up = new Point3D(0, 1, 0);
         this.right = new Point3D(1, 0, 0);
     }
 
-    moveForward(magnitude) {
-        this.position.x += this.direction.x * magnitude;
-        this.position.y += this.direction.y * magnitude;
-        this.position.z += this.direction.z * magnitude;
+    /** Move forward/backward */
+    moveForward(mag) {
+        this.position.x += this.direction.x * mag;
+        this.position.y += this.direction.y * mag;
+        this.position.z += this.direction.z * mag;
     }
 
-    moveRight(magnitude) {
-        this.position.x += this.right.x * magnitude;
-        this.position.y += this.right.y * magnitude;
-        this.position.z += this.right.z * magnitude;
+    /** Move right/left */
+    moveRight(mag) {
+        this.position.x += this.right.x * mag;
+        this.position.y += this.right.y * mag;
+        this.position.z += this.right.z * mag;
     }
 
-    moveUp(magnitude) {
-        this.position.x += this.up.x * magnitude;
-        this.position.y += this.up.y * magnitude;
-        this.position.z += this.up.z * magnitude;
+    /** Move up/down */
+    moveUp(mag) {
+        this.position.x += this.up.x * mag;
+        this.position.y += this.up.y * mag;
+        this.position.z += this.up.z * mag;
     }
 }
