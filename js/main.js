@@ -52,18 +52,18 @@ function main() {
 
     function movementKeyCheck() {
         //console.log(camera.direction);
-        console.log(camera.position);
+        //console.log(camera.position);
         if (keys['w']) camera.moveForward(cameraSpeed);
         if (keys['s']) camera.moveForward(-cameraSpeed);
 
         if (keys['d']) camera.moveRight(cameraSpeed);
         if (keys['a']) camera.moveRight(-cameraSpeed);
 
-        if (keys[' ']) camera.moveUp(-cameraSpeed);
-        if (keys['shift']) camera.moveUp(cameraSpeed);
+        if (keys[' ']) camera.moveUp(cameraSpeed);
+        if (keys['shift']) camera.moveUp(-cameraSpeed);
 
-        if (keys['arrowup']) camera.rotateX(0.05);
-        if (keys['arrowdown']) camera.rotateX(-0.05);
+        if (keys['arrowup']) camera.rotateX(-0.05);
+        if (keys['arrowdown']) camera.rotateX(0.05);
         if (keys['arrowleft']) camera.rotateY(-0.05);
         if (keys['arrowright']) camera.rotateY(0.05);
     }
