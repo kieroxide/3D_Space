@@ -8,7 +8,7 @@ class Point3D {
      * @param {number} y - The y-coordinate.
      * @param {number} z - The z-coordinate.
      */
-    
+
     constructor(x, y, z) {
         this.x = x;
         this.y = y;
@@ -48,10 +48,18 @@ class Point3D {
         return new Point2D(this.x, this.y);
     }
 
+    //Perspective projection
+    projectPerspective() {
+        const px = (focalLength * this.x) / this.z;
+        const py = (focalLength * this.y) / this.z;
+
+        return new Point2D(px, py);
+    }
+
     render(camera) {
         let p = this.translate(camera.position);
         p = p.rotateYaw(camera.yaw);
         p = p.rotatePitch(camera.pitch);
-        return p.project();
+        return p.projectPerspective();
     }
 }

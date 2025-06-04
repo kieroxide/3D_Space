@@ -1,4 +1,6 @@
 const keys = {};
+const focalLength = 500;
+const cameraSpeed = 5;
 
 window.addEventListener('keydown', (e) => {
   keys[e.key.toLowerCase()] = true;
@@ -42,14 +44,15 @@ function main(){
         
     draw();
     function movementKeyCheck(){
-        if (keys['w']) camera.moveForward(1);
-        if (keys['s']) camera.moveForward(-1);
+        console.log(camera.direction)
+        if (keys['w']) camera.moveForward(cameraSpeed);
+        if (keys['s']) camera.moveForward(-cameraSpeed);
 
-        if (keys['d']) camera.moveRight(1);
-        if (keys['a']) camera.moveRight(-1);
+        if (keys['d']) camera.moveRight(cameraSpeed);
+        if (keys['a']) camera.moveRight(-cameraSpeed);
 
-        if (keys[' ']) camera.moveUp(1);
-        if (keys['shift']) camera.moveUp(-1);
+        if (keys[' ']) camera.moveUp(cameraSpeed);
+        if (keys['shift']) camera.moveUp(-cameraSpeed);
 
         if( keys['arrowup']) camera.rotateX(0.05);
         if( keys['arrowdown']) camera.rotateX(-0.05);

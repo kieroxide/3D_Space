@@ -48,7 +48,7 @@ class Camera {
     this.direction = new Point3D(
         Math.cos(this.pitch) * Math.sin(this.yaw),
         Math.sin(this.pitch),
-        Math.cos(this.pitch) * Math.cos(this.yaw)
+        -Math.cos(this.pitch) * Math.cos(this.yaw)
     );
 }
 
