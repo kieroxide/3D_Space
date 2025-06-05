@@ -60,7 +60,7 @@ class Point3D {
         let p = this.translate(camera.position);
         p = p.rotateYaw(camera.yaw);
         p = p.rotatePitch(camera.pitch);
-        if (p.z >= 0) return 0; // Prevent division by zero
+        if (p.z >= -0.1) return null; // Prevent division by zero
         return p.projectPerspective();
     }
 

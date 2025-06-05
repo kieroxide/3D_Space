@@ -1,9 +1,10 @@
 const keys = {};
-const focalLength = 900;
-const cameraSpeed = 5;
+const focalLength = 300;
+const cameraSpeed = 20;
 
 let lines = [];
 let cubes = [];
+let planes = [];
 let canvas, ctx, camera;
 
 window.addEventListener('keydown', (e) => {
@@ -38,10 +39,18 @@ function main() {
 
     pointA = new Point3D(200, 200, 200);
     cubes.push(new Cube(pointA, 100, ['#00bfff', '#ff69b4', '#7fff00', '#ff8c00', '#8a2be2', '#00ced1']));
+    const floorY = 0;
+    const size = 100;
+    const floorColor = '#cccccc';
 
-    let lastMouseX, lastMouseY;
-    let mouseActive = false;
+    const p1 = new Point3D(-size, floorY, -size);
+    const p2 = new Point3D(size, floorY, -size);
+    const p3 = new Point3D(size, floorY, size);
+    const p4 = new Point3D(-size, floorY, size);
 
+    const tri1 = new Triangle(p1, p2, p3, floorColor);
+    const tri2 = new Triangle(p1, p3, p4, floorColor);
+    planes.push(new Face([tri1, tri2], floorColor));
 
     canvas.addEventListener('click', () => {
         window.focus(); // Ensure window is focused
@@ -66,22 +75,39 @@ function main() {
         }
     });
 
+    document.getElementById('add-btn').onclick = function() {
+        const v1 = parseInt(document.getElementById('newShapeX').value, 10) || 0;
+        const v2 = parseInt(document.getElementById('newShapeY').value, 10) || 0;
+        const v3 = parseInt(document.getElementById('newShapeZ').value, 10) || 0;
+        const v4 = document.getElementById('newShapeSize').value || 20;
+        cubes.push(new Cube(new Point3D(v1, v2, v3), v4, ['#00bfff', '#ff69b4', '#7fff00', '#ff8c00', '#8a2be2', '#00ced1']))
+    }
     function draw() {
         ctx.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         movementKeyCheck();
-        cubes[0].getMesh();
-        cubes[1].getMesh();
+        const cam = camera.position;
+        document.getElementById('camera-pos').textContent = `Camera: x=${cam.x.toFixed(2)} y=${cam.y.toFixed(2)} z=${cam.z.toFixed(2)}`;
+        for (const plane of planes) {
+            plane.draw(ctx, camera);
+        }
+        for (const line of lines) {
+            line.render(camera);
+            line.draw(ctx);
+        }
+        cubes.sort((a, b) => {
+            const aDistance = a.getMesh()[0].distanceFrom(camera);
+            const bDistance = b.getMesh()[0].distanceFrom(camera);
+            return bDistance - aDistance; // Sort by distance from camera (farther first)
+        });
         for (const cube of cubes){
+            cube.getMesh();
             //cube.rotatePitch(0.01);
             //cube.rotateYaw(0.01);
             cube.rotateVerticesPitch(0.01);
             cube.rotateVerticesYaw(0.01);
             cube.draw(ctx, camera);
         }
-        for (const line of lines) {
-            line.render(camera);
-            line.draw(ctx);
-        }
+        
         requestAnimationFrame(draw);
     }
 

@@ -15,6 +15,9 @@ class Triangle{
         this.projectedPoints = [];
         for (const point of [this.pointA, this.pointB, this.pointC]) {
             const projectedPoint = point.render(camera);
+            if (projectedPoint === null) {
+                return; // Skip rendering if point is behind the camera
+            }
             this.projectedPoints.push(new Point2D(projectedPoint.x, projectedPoint.y));
         }
         ctx.beginPath();

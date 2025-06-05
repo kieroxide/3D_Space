@@ -22,8 +22,8 @@ class Line {
     }
 
     draw(ctx) {
-        if (!(this.projectedEnd || this.projectedStart === null)) {
-            return;
+        if (this.projectedStart === null || this.projectedEnd === null) {
+            return; // Don't draw if either endpoint is not visible
         }
 
         ctx.beginPath();
