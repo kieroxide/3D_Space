@@ -3,7 +3,7 @@
  */
 class Camera {
     constructor() {
-        this.position = new Point3D(0, 0, 0);
+        this.position = new Point3D(0, 0, 100);
         this.direction = new Point3D(0, 0, -1);
         this.up = new Point3D(0, 1, 0);
         this.right = new Point3D(1, 0, 0);

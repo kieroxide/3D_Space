@@ -44,14 +44,14 @@ class Point3D {
 
     // Orthographic projection
     project() {
-        return new Point2D(this.x, this.y);
+        return new Point2D(this.x, -this.y);
     }
 
     // Perspective projection
     projectPerspective() {
         const z = this.z === 0 ? -0.0001 : this.z; // Prevent division by zero
         const px = (focalLength * this.x) / -z;
-        const py = (focalLength * this.y) / -z;
+        const py = -(focalLength * this.y) / -z;
 
         return new Point2D(px, py);
     }
